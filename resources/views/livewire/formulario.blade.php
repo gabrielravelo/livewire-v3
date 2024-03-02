@@ -3,17 +3,19 @@
         <form wire:submit='save'>
             <div class="mb-4">
                 <x-label>Nombre</x-label>
-                <x-input class="w-full" wire:model='title'/>
+                <x-input class="w-full" wire:model='postCreate.title'/>
+                <x-input-error for="postCreate.title" />
             </div>
 
             <div class="mb-4">
                 <x-label>Contenido</x-label>
-                <x-textarea class="w-full" wire:model='content'></x-textarea>
+                <x-textarea class="w-full" wire:model='postCreate.content'></x-textarea>
+                <x-input-error for="postCreate.content" />
             </div>
 
             <div class="mb-4">
                 <x-label>Categoria</x-label>
-                <x-select class="w-full" wire:model='category_id'>
+                <x-select class="w-full" wire:model='postCreate.category_id'>
                     <option value="" disabled>
                         seleccione una categoria
                     </option>
@@ -21,6 +23,7 @@
                         <option value='{{ $category->id }}'>{{ $category->name }}</option>
                     @endforeach
                 </x-select>
+                <x-input-error for="postCreate.category_id" />
             </div>
 
             <div class="mb-4">
@@ -29,12 +32,13 @@
                     @foreach ($tags as $tag)
                         <li>
                             <x-label>
-                                <x-checkbox wire:model='selectedTags' value="{{ $tag->id }}" />
+                                <x-checkbox wire:model='postCreate.tags' value="{{ $tag->id }}" />
                                 {{ $tag->name }}
                             </x-label>
                         </li>
                     @endforeach
                 </ul>
+                <x-input-error for="postCreate.tags" />
             </div>
 
             <div class="flex justify-end">
@@ -76,11 +80,13 @@
                 <div class="mb-4">
                     <x-label>Nombre</x-label>
                     <x-input class="w-full" wire:model='postEdit.title'/>
+                    <x-input-error for="postEdit.title" />
                 </div>
     
                 <div class="mb-4">
                     <x-label>Contenido</x-label>
                     <x-textarea class="w-full" wire:model='postEdit.content'></x-textarea>
+                    <x-input-error for="postEdit.content" />
                 </div>
     
                 <div class="mb-4">
@@ -93,6 +99,7 @@
                             <option value='{{ $category->id }}'>{{ $category->name }}</option>
                         @endforeach
                     </x-select>
+                    <x-input-error for="postEdit.category_id" />
                 </div>
     
                 <div class="mb-4">
@@ -107,6 +114,7 @@
                             </li>
                         @endforeach
                     </ul>
+                    <x-input-error for="postEdit.tags" />
                 </div>
             </x-slot>
 
