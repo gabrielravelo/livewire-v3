@@ -3,19 +3,19 @@
         <form wire:submit='save'>
             <div class="mb-4">
                 <x-label>Nombre</x-label>
-                <x-input class="w-full" wire:model='postCreate.title'/>
+                <x-input class="w-full" wire:model.blur='postCreate.title'/>
                 <x-input-error for="postCreate.title" />
             </div>
 
             <div class="mb-4">
                 <x-label>Contenido</x-label>
-                <x-textarea class="w-full" wire:model='postCreate.content'></x-textarea>
+                <x-textarea class="w-full" wire:model.blur='postCreate.content'></x-textarea>
                 <x-input-error for="postCreate.content" />
             </div>
 
             <div class="mb-4">
                 <x-label>Categoria</x-label>
-                <x-select class="w-full" wire:model='postCreate.category_id'>
+                <x-select class="w-full" wire:model.blur='postCreate.category_id'>
                     <option value="" disabled>
                         seleccione una categoria
                     </option>
@@ -32,7 +32,7 @@
                     @foreach ($tags as $tag)
                         <li>
                             <x-label>
-                                <x-checkbox wire:model='postCreate.tags' value="{{ $tag->id }}" />
+                                <x-checkbox wire:model.blur='postCreate.tags' value="{{ $tag->id }}" />
                                 {{ $tag->name }}
                             </x-label>
                         </li>
@@ -71,7 +71,7 @@
 
     {{-- Formulario de edicion --}}
     <form wire:submit='update'>
-        <x-dialog-modal wire:model='open'>
+        <x-dialog-modal wire:model='postEdit.open'>
             <x-slot name="title">
                 Actualizar Post
             </x-slot>
@@ -120,7 +120,7 @@
 
             <x-slot name="footer">
                 <div class="flex justify-end">
-                    <x-danger-button class="mr-2" wire:click="$set('open', false)">
+                    <x-danger-button class="mr-2" wire:click="$set('postEdit.open', false)">
                         Cancelar
                     </x-danger-button>
                     
