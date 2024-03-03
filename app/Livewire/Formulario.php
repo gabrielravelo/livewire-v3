@@ -19,8 +19,6 @@ class Formulario extends Component
     
     public $posts;
 
-    
-
     public function mount()
     {
         $this->categories = Category::all();
@@ -32,8 +30,8 @@ class Formulario extends Component
     public function save()
     {
         $this->postCreate->save();
-        $this->posts = Post::all();
-
+        $this->posts = Post::all(); 
+        $this->dispatch('new-comment', 'Articulo Nuevo');
     }
 
     public function edit(Post $post)
@@ -46,13 +44,14 @@ class Formulario extends Component
     {
         $this->postEdit->update();
         $this->posts = Post::all();
-
+        $this->dispatch('new-comment', 'Articulo Actualizado');
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
         $this->posts = Post::all();
+        $this->dispatch('new-comment', 'Articulo Eliminado');
     }
 
     public function render()

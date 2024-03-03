@@ -132,4 +132,11 @@
         </x-dialog-modal>
     </form>
 
+    @push('js')
+        <script>
+            Livewire.on('new-comment', function(comment) {
+                console.log(comment[0]);
+            });
+        </script>
+    @endpush
 </div>
