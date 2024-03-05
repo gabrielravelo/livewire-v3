@@ -8,6 +8,11 @@ class Father extends Component
 {
     public $name = 'Gabriel Ravelo';
     
+    public function redirigir()
+    {
+        return $this->redirect('prueba', navigate: true);
+    }
+
     public function render()
     {
         return view('livewire.father');
