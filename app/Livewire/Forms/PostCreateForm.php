@@ -20,6 +20,11 @@ class PostCreateForm extends Form
     #[Validate('required|array')]
     public $tags = [];
 
+    public $imageKey;
+
+    #[Validate('image|max:1024|nullable')]
+    public $image;
+
     public function save()
     {
         $this->validate();
@@ -28,8 +33,15 @@ class PostCreateForm extends Form
             $this->all()
         );
 
+        
         $post->tags()->attach($this->tags);
+        
+        if($this->image) {
+            $post->image_path = $this->image->store('posts');
+            $post->save();
+        }
 
         $this->reset();
+        $this->imageKey = rand();
     }
 }

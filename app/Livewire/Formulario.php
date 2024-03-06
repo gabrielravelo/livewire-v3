@@ -8,9 +8,12 @@ use App\Models\Tag;
 use App\Models\Post;
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class Formulario extends Component
 {
+    use WithFileUploads;
+    
     public $categories, $tags;
 
     public PostCreateForm $postCreate;
