@@ -66,11 +66,18 @@
             </div>
 
             <div class="flex justify-end">
-                <x-button>
+                <x-button wire:loading.class="opacity-25" wire:loading.attr='disabled'>
                     Crear
                 </x-button>
             </div>
         </form>
+
+        <div wire:loading.delay>
+            Hola mundo
+        </div>
+        {{-- <div wire:loading wire:target="save">
+            Procesando...
+        </div> --}}
     </div>
 
     <div class="bg-white shadow rounded-lg p-6">
