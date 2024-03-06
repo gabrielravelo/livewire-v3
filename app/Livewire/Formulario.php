@@ -8,6 +8,7 @@ use App\Models\Tag;
 use App\Models\Post;
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\Attributes\Url;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\WithPagination;
 
@@ -19,8 +20,10 @@ class Formulario extends Component
     public $categories, $tags;
 
     public PostCreateForm $postCreate;
-
     public PostEditForm $postEdit;
+
+    #[Url(as: 's')]
+    public $search = '';
     
     public function mount()
     {
@@ -65,7 +68,12 @@ class Formulario extends Component
 
     public function render()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(5, pageName: 'pagePosts');
+        $posts = Post::orderBy('id', 'desc')
+        ->when($this->search, function($query) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        })
+        ->paginate(5, pageName: 'pagePosts');
+        
         return view('livewire.formulario', compact('posts'));
     }
 }
