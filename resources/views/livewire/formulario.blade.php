@@ -72,9 +72,9 @@
             </div>
         </form>
 
-        <div wire:loading.delay>
+        {{-- <div wire:loading.delay>
             Hola mundo
-        </div>
+        </div> --}}
         {{-- <div wire:loading wire:target="save">
             Procesando...
         </div> --}}
@@ -98,6 +98,10 @@
 
             @endforeach
         </ul>
+
+        <div class="mt-4">
+            {{ $posts->links(data: ['scrollTo' => false]) }}
+        </div>
     </div>
 
     {{-- Formulario de edicion --}}
