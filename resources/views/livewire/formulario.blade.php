@@ -32,8 +32,22 @@
 
             <div class="mb-4">
                 <x-label>Imagen</x-label>
-                <input type="file" wire:model.blur='postCreate.image' wire:key="{{ $postCreate->imageKey }}" />
-                <x-input-error for="postCreate.image" />
+
+                <div
+                    x-data="{ uploading: false, progress: 0 }"
+                    x-on:livewire-upload-start="uploading = true"
+                    x-on:livewire-upload-finish="uploading = false"
+                    x-on:livewire-upload-cancel="uploading = false"
+                    x-on:livewire-upload-error="uploading = false"
+                    x-on:livewire-upload-progress="progress = $event.detail.progress"
+                >
+                    <input type="file" wire:model.blur='postCreate.image' wire:key="{{ $postCreate->imageKey }}" />
+                    <x-input-error for="postCreate.image" />
+                    
+                    <div x-show="uploading">
+                        <progress max="100" x-bind:value="progress"></progress>
+                    </div>
+                </div>
             </div>
 
             <div class="mb-4">
